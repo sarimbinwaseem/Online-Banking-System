@@ -4,6 +4,7 @@ from Banking.checking_acc import CheckingAccount
 from Banking.loan_acc import LoanAccount
 from Banking.savings_acc import SavingsAccount
 from Banking.datahandling import DataHandling
+from Banking.account import Account
 
 
 class Customer:
@@ -28,6 +29,8 @@ class Customer:
         self.dh_object = DataHandling()
         self.dh_object.load_file()
 
+        self.new_account = None
+
     def diff_account(self):
         flag = True
         while flag:
@@ -46,33 +49,33 @@ class Customer:
                 )  # account creation based on customer's choice
                 time.sleep(0.2)
                 if create_account == 1:
-                    c = CheckingAccount(5000, self.dh_object, self.accountNumber)
-                    c.acc_created()
-                    c.deposit()
+                    self.new_account = CheckingAccount(5000, self.dh_object, self.accountNumber)
+                    self.new_account.acc_created()
+                    self.new_account.deposit()
                     print("")
                     time.sleep(0.2)
                     print("======================================")
-                    print("YOUR BALANCE IS:", c.balance_enquiry())
+                    print("YOUR BALANCE IS:", self.new_account.balance_enquiry())
                     print("=======================================")
                     break
                 elif create_account == 2:
-                    save = SavingsAccount(0.01, 500, self.dh_object, self.accountNumber)
-                    save.acc_created()
-                    save.deposit()
+                    self.new_account = SavingsAccount(0.01, 500, self.dh_object, self.accountNumber)
+                    self.new_account.acc_created()
+                    self.new_account.deposit()
                     print("")
                     time.sleep(0.2)
                     print("=======================================")
-                    print("YOUR BALANCE IS:", save.balance_enquiry())
+                    print("YOUR BALANCE IS:", self.new_account.balance_enquiry())
                     print("=======================================")
                     break
                 elif create_account == 3:
-                    loan = LoanAccount(0, 0.05, 12, self.dh_object, self.accountNumber)
-                    loan.acc_created()
-                    loan.loan()
+                    self.new_account = LoanAccount(0, 0.05, 12, self.dh_object, self.accountNumber)
+                    self.new_account.acc_created()
+                    self.new_account.loan()
                     print("")
                     time.sleep(0.2)
                     print("=======================================")
-                    print("YOUR BALANCE IS:", loan.balance_enquiry())
+                    print("YOUR BALANCE IS:", self.new_account.balance_enquiry())
                     print("=======================================")
                     loan.calculation()
                     break
@@ -83,12 +86,14 @@ class Customer:
                 print("INVALID ENTRY\n")
             time.sleep(0.2)
 
-    def update(self):  # updates the info for storage and further procedures
+    def update(self):
+        """updates the info for storage and further procedures"""
+
         self.data_value.update(
             {
                 "username": self.username,
                 "name": [self.firstName, self.lastName],
-                "track": track,
+                "track": {self.curr_date: 'none, ACCOUNT CREATED'},
                 "deposit": deposit,
                 "returning amount": 0,
             }
@@ -105,6 +110,7 @@ class Customer:
         self.email = input("[?] Enter email: ")
         self.phoneNumber = input("[?] Enter Phone Number: ")
         self.password = input("[?] Enter Password: ")
+        self.cur_date = Account.current_time(self)
 
         pin = random.sample(range(1, 10), 4)  # generates account number
         self.accountNumber = "".join(map(str, pin))  # assigns account number

@@ -16,7 +16,7 @@ class SavingsAccount(Account):  # child class of account
 
     def acc_created(self):  # stores account creation date
         Account.current_time(self)
-        track.update({self.curr_date: "none, ACCOUNT CREATED"})
+        self.track.update({self.curr_date: "none, ACCOUNT CREATED"})
 
     def withdraw(self):  # works as per our saving account withdrawal policy
         self.balance = self.instance.content[self.accountNumber]["balance"]

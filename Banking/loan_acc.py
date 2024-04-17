@@ -11,7 +11,7 @@ class LoanAccount(Account):  # child class of account
 
     def acc_created(self):  # stores account creation date
         Account.current_time(self)
-        track.update({self.curr_date: "none, ACCOUNT CREATED"})
+        self.track.update({self.curr_date: "none, ACCOUNT CREATED"})
 
     def loan(self):  # provides loan
         self.principleAmount = float(
@@ -28,7 +28,7 @@ class LoanAccount(Account):  # child class of account
         except ValueError:
             print("\n--------------------------")
             print("INVALID INPUT\n")
-            time.sleep(1)
+            time.sleep(0.2)
             self.loan()
 
     def withdraw(self):  # for withdrawal
@@ -46,7 +46,7 @@ class LoanAccount(Account):  # child class of account
                     print("======================")
                     print("Insufficient balance")
                     print("======================\n")
-                    time.sleep(1)
+                    time.sleep(0.2)
                     break
             except ValueError:
                 print("\n_____________________________________________")
@@ -56,7 +56,7 @@ class LoanAccount(Account):  # child class of account
         self.cal = self.principleAmount * self.interestRate
         self.final_cal = self.principleAmount + self.cal
         data_value.update({"account type": "Loan Account", "loan": self.final_cal})
-        time.sleep(1)
+        time.sleep(0.2)
         print("\n=============================================")
         print(f"you will RETURN the amount {self.final_cal}")
         print("===============================================")
@@ -72,7 +72,7 @@ class LoanAccount(Account):  # child class of account
                     LoanAccount.calculation(self)
                 elif self.months < 12 and self.principleAmount <= 0:
                     self.principleAmount = 0
-                    time.sleep(1)
+                    time.sleep(0.2)
                     print("+++++++++++++++++++++++++++++++++++++++++++++++")
                     print("+ CONGRATULATION! YOU HAVE PAID YOUR LOAN OFF.+")
                     print("+++++++++++++++++++++++++++++++++++++++++++++++")
@@ -99,4 +99,4 @@ class LoanAccount(Account):  # child class of account
             except ValueError:
                 print("--------------------------------------------")
                 print("Invalid input. Please enter a valid amount.")
-                time.sleep(1)
+                time.sleep(0.2)

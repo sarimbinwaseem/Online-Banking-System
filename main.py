@@ -10,10 +10,10 @@ data_value = {}
 
 # has another dictionary passed to d containing time/date etc. 
 # key: date, value: day
-track = {}  
+track = {}
 
 # contains all deposit history
-deposit = {} 
+deposit = {}
 
 
 
@@ -28,13 +28,13 @@ class Start:
 
     def starting(self):
         print("                              @:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@")
-        print('                              @        ~    WELCOME TO SSR BANK    ~      @')
+        print("                              @        ~    WELCOME TO SSR BANK    ~      @")
         print("                              @:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@:@")
         time.sleep(1)
 
         #loops for smooth execution
         while True: 
-            print('\n1. Admin  \n2. Customer')
+            print("\n1. Admin  \n2. Customer")
             response = input("ENTER: ")
             print("::::::::::::::::::::\n")
             time.sleep(1)
@@ -45,19 +45,19 @@ class Start:
                 a = Admin()
                 username_a = input("Username: ")
                 password_a = input("Password: ")
-                with open('me.txt') as admin_file:
+                with open("me.txt") as admin_file:
                     admin_read = admin_file.read()
                     admin_object = admin_read.split()
 
                 # checks whether the credentials match
-                if username_a == admin_object[0] and password_a == admin_object[1]:
-                    a.admin_interface()
-                    break
-                else:
-                    print('INVALID USERNAME OR PASSWORD')
+                if not (username_a == admin_object[0] and password_a == admin_object[1]):
+                    print("INVALID USERNAME OR PASSWORD")
+                    continue
+
+                a.admin_interface()
 
             else:
-                print('Invalid entry')
+                print("Invalid entry")
 
 def main():
     session = Start()

@@ -15,6 +15,7 @@ class Account(ABC):
         self.accountNumber = account_number
         self.balance = balance
         self.data_value = {}
+        self.track = {}
 
     def deposit(self):
         """deposits amount"""
@@ -50,11 +51,11 @@ class Account(ABC):
 
         while True:
             try:
-                self.curr_date = input(
+                curr_date = input(
                     "Enter the current date in (YYYY MM DD) format: "
                 )
                 print("---------------------------------------------------")
-                a = self.curr_date.split()
+                a = curr_date.split()
                 b = list(map(int, a))
 
                 if (
@@ -62,10 +63,13 @@ class Account(ABC):
                 ):  # FOR PRINTING WITH IN RANGE
                     raise ValueError
                 else:
+                    self.curr_date = curr_date
                     break
 
             except ValueError:
                 print("Invalid input. Please enter a valid date.")
+
+        return curr_date
 
     def time_management(self, months=0):  # checks if it has been a month
         self.months = months
@@ -73,7 +77,9 @@ class Account(ABC):
 
         extract = DataHandling()
         extract.load_file()  # loads file into self.content
-        find = self.instance.content[self.accountNumber]["track"]  # track is a key here
+
+        # track is a key here
+        find = self.instance.content[self.accountNumber]["track"]
 
         last_element = list(find.items())[-1]
         last_key = last_element[0]  # ????

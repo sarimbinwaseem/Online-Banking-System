@@ -15,7 +15,7 @@ class Admin:
         time.sleep(1)
         print("\n:::::::::::::::::::::::::::::::::::::::")
         print(
-            """1) ACCESS CUSTOMER'S DETAILS 
+            """1) ACCESS CUSTOMERS' DETAILS 
 2) ACCESS A "PARTICULAR CUSTOMER'S" DETAILS 
 3) CHANGE USERNAME AND PASSWORD 
 4) TO EXIT"""
