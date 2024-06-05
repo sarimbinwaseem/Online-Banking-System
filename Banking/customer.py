@@ -86,7 +86,7 @@ class Customer:
                 print("INVALID ENTRY\n")
             time.sleep(0.2)
 
-    def update(self):
+    def update(self, flag: int):
         """updates the info for storage and further procedures"""
 
         self.data_value.update(
@@ -98,6 +98,8 @@ class Customer:
                 "returning amount": 0,
             }
         )
+        if flag == 1:
+            self.data_value["account type"] = self.new_account.data_value.get("account type")
         self.dh_object.content[self.accountNumber] = self.data_value
 
     def filing(self):  # dumps the file
@@ -129,22 +131,28 @@ class Customer:
     def new_customer(self):
         print("1. New Account \n2. Old Account")
         # while True:
-        reply = input("ENTER: ")
+        try:
+            reply = input("ENTER: ")
+        except KeyboardInterrupt:
+            sys.exit(1)
         print("::::::::::::::::::::::::::::")
         print("")
         time.sleep(0.2)
 
         if reply == "1":
             self.get_new_info()
-            self.update()
+            self.update(0)
             self.diff_account()
-            self.update()
+            self.update(1)
             self.filing()
             # break
 
         elif reply == "2":
             while True:
-                acc_num = input("ENTER YOUR ACCOUNT NUMBER: ")
+                try:
+                    acc_num = input("ENTER YOUR ACCOUNT NUMBER: ")
+                except KeyboardInterrupt:
+                    sys.exit(1)
                 print(":::::::::::::::::::::::::::::\n")
                 time.sleep(0.2)
                 self.dh_object.load_file()
@@ -163,8 +171,10 @@ class Customer:
                     print(
                         "1) TO DEPOSIT \n2) TO WITHDRAW \n3) TO VIEW BALANCE AND HISTORY \n4) TO EXIT"
                     )
-
-                    options = input("ENTER: ")
+                    try:
+                        options = input("ENTER: ")
+                    except KeyboardInterrupt:
+                        sys.exit(1)
                     print(":::::::::::::::\n")
                     time.sleep(0.2)
                     if options == "3":

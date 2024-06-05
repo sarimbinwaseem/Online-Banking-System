@@ -8,7 +8,7 @@ class SavingsAccount(Account):  # child class of account
     ):  # ir=0.01 (1% per month), min_amount=500
         self.interestRate, self.minimumAmount = ir, min_amount
         super().__init__(instance, account_number, balance=0)
-        self.data_value.update({"account type": "Savings Account"})
+        self.data_value["account type"] = "Saving Account"
 
     def previous(self):  ##gets balance
         self.balance = self.instance.content[self.accountNumber]["balance"]
@@ -62,3 +62,5 @@ class SavingsAccount(Account):  # child class of account
                 print("--------------------------------------------")
                 print("Invalid input. Please enter a valid amount.")
                 time.sleep(1)
+            except KeyboardInterrupt:
+                sys.exit(1)

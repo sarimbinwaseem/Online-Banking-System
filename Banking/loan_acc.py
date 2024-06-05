@@ -8,6 +8,7 @@ class LoanAccount(Account):  # child class of account
     ):  # pa=0 , ir=0.1, ld=12 months
         self.principleAmount, self.interestRate, self.loanDuration = pa, ir, ld
         super().__init__(instance, account_number, balance=0)
+        self.data_value["account type"] = "Loan Account"
 
     def acc_created(self):  # stores account creation date
         Account.current_time(self)
@@ -51,6 +52,8 @@ class LoanAccount(Account):  # child class of account
             except ValueError:
                 print("\n_____________________________________________")
                 print("Invalid input. Please enter a valid amount.")
+            except KeyboardInterrupt:
+                sys.exit(1)
 
     def calculation(self):  # calculates returning amount with interest
         self.cal = self.principleAmount * self.interestRate
@@ -100,3 +103,5 @@ class LoanAccount(Account):  # child class of account
                 print("--------------------------------------------")
                 print("Invalid input. Please enter a valid amount.")
                 time.sleep(0.2)
+            except KeyboardInterrupt:
+                sys.exit(1)

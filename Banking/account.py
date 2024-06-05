@@ -7,7 +7,9 @@ from Banking.datahandling import DataHandling
 class Account(ABC):
     """
     abstract class having all basic methods required for sub-classes
-    Account (abstract class): This is an abstract base class that defines common attributes and methods for different types of bank accounts.
+    Account (abstract class): This is an abstract base class that defines common attributes
+    and methods for different types of bank accounts.
+    
     It has methods for depositing, withdrawing, and checking the balance of an account.
     The withdraw() method is defined as an abstract method, which needs to be implemented in the derived classes.
     """
@@ -26,6 +28,7 @@ class Account(ABC):
         while True:
             try:
                 self.dep = float(input("Enter the amount to deposit:"))
+                
                 if self.dep > 0:
                     self.balance += self.dep
                     existing_transactions = self.instance.content[self.accountNumber][
@@ -40,6 +43,8 @@ class Account(ABC):
                     print("Invalid deposit")
             except ValueError:
                 print("Invalid input. Please enter a valid amount.")
+            except KeyboardInterrupt:
+                sys.exit(1)
 
     @abstractmethod
     def withdraw(self):

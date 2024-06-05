@@ -24,8 +24,11 @@ class Admin:
         time.sleep(1)
 
     def set_credentials(self):  # sets new credentials
-        self.username = input("Enter new Username: ")
-        self.password = input("Enter new Password: ")
+        try:
+            self.username = input("Enter new Username: ")
+            self.password = input("Enter new Password: ")
+        except KeyboardInterrupt:
+            sys.exit(1)
         with open("me.txt", "w") as f:
             f.write(f"{self.username} {self.password}")
         print("NEW USERNAME/PASSWORD SET!")
@@ -48,7 +51,10 @@ class Admin:
     @staticmethod
     def p_printing():  # prints a particular customer's history
         obj = DataHandling()
-        pin = input("Enter account number: ")
+        try:
+            pin = input("Enter account number: ")
+        except KeyboardInterrupt:
+            sys.exit(1)
         obj.customer_history(pin)
 
     def admin_interface(self):  # provides option for selection
@@ -68,3 +74,5 @@ class Admin:
                     print("INVALID VALUE")
             except ValueError:
                 print("Invalid input. Please enter a valid option.")
+            except KeyboardInterrupt:
+                sys.exit(1)

@@ -1,3 +1,4 @@
+import sys
 import random
 import time
 from Banking.customer import Customer
@@ -35,7 +36,10 @@ class Start:
         #loops for smooth execution
         while True: 
             print("\n1. Admin  \n2. Customer")
-            response = input("ENTER: ")
+            try:
+                response = input("ENTER: ")
+            except KeyboardInterrupt:
+                sys.exit(1)
             print("::::::::::::::::::::\n")
             time.sleep(1)
             if response == '2':
@@ -43,8 +47,12 @@ class Start:
 
             elif response == '1':
                 a = Admin()
-                username_a = input("Username: ")
-                password_a = input("Password: ")
+                try:
+                    username_a = input("Username: ")
+                    password_a = input("Password: ")
+                except KeyboardInterrupt:
+                    sys.exit(1)
+
                 with open("me.txt") as admin_file:
                     admin_read = admin_file.read()
                     admin_object = admin_read.split()

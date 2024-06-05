@@ -15,7 +15,7 @@ class CheckingAccount(Account):
     def __init__(self, credit_limit, instance, account_number):  # c=5000
         super().__init__(instance, account_number, balance=0)
         self.creditLimit = credit_limit  # per day
-        self.data_value.update({"account type": "Checking Account"})
+        self.data_value["account type"] = "Checking Account"
 
     def previous(self):  # gets balance
         self.balance = self.instance.content[self.accountNumber]["balance"]
@@ -96,3 +96,5 @@ class CheckingAccount(Account):
             except ValueError:
                 print("\n--------------------------------------------")
                 print("Invalid input. Please enter a valid amount.")
+            except KeyboardInterrupt:
+                sys.exit(1)
