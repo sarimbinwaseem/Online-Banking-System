@@ -94,7 +94,7 @@ class Customer:
                 "username": self.username,
                 "name": [self.firstName, self.lastName],
                 "track": {self.curr_date: 'none, ACCOUNT CREATED'},
-                "deposit": deposit,
+                "deposit": self.new_account.deposit_space if self.new_account is not None else {},
                 "returning amount": 0,
             }
         )

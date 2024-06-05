@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
+import arrow
 from Banking.datahandling import DataHandling
+
 
 
 class Account(ABC):
@@ -16,6 +18,7 @@ class Account(ABC):
         self.balance = balance
         self.data_value = {}
         self.track = {}
+        self.deposit_space = {}
 
     def deposit(self):
         """deposits amount"""
@@ -51,9 +54,10 @@ class Account(ABC):
 
         while True:
             try:
-                curr_date = input(
-                    "Enter the current date in (YYYY MM DD) format: "
-                )
+                # curr_date = input(
+                #     "Enter the current date in (YYYY MM DD) format: "
+                # )
+                curr_date = arrow.now().format("YYYY MM DD")
                 print("---------------------------------------------------")
                 a = curr_date.split()
                 b = list(map(int, a))
